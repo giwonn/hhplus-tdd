@@ -6,13 +6,15 @@ import io.hhplus.tdd.point.domain.exception.InvalidUserPointException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @AllArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Builder
 public class UserPoint {
 
-    static final long MAX_BALANCE = 1_000_000L;
+    final static long MAX_BALANCE = 1_000_000L;
 
     private long id;
     private long point;

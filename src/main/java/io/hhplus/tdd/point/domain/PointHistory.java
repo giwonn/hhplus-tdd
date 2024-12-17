@@ -1,6 +1,5 @@
 package io.hhplus.tdd.point.domain;
 
-import io.hhplus.tdd.point.TransactionType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,5 +14,13 @@ public class PointHistory {
     private long amount;
     private TransactionType type;
     private long updateMillis;
+
+    public static PointHistory fromUserPoint(UserPoint userPoint, TransactionType type) {
+        return PointHistory.builder()
+                .userId(userPoint.getId())
+                .amount(userPoint.getPoint())
+                .type(type)
+                .build();
+    }
 
 }
