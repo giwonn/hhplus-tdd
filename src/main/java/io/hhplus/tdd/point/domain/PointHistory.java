@@ -19,6 +19,7 @@ public class PointHistory {
         return PointHistory.builder()
                 .userId(userPoint.getId())
                 .amount(userPoint.getPoint())
+                .updateMillis(userPoint.getUpdateMillis())
                 .type(type)
                 .build();
     }
