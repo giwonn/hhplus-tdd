@@ -1,8 +1,8 @@
 package io.hhplus.tdd.database;
 
 
-import io.hhplus.tdd.point.PointHistory;
-import io.hhplus.tdd.point.TransactionType;
+import io.hhplus.tdd.point.domain.TransactionType;
+import io.hhplus.tdd.point.infrastructure.PointHistoryEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,18 +14,18 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class PointHistoryTable {
-    private final List<PointHistory> table = new ArrayList<>();
+    private final List<PointHistoryEntity> table = new ArrayList<>();
     private long cursor = 1;
 
-    public PointHistory insert(long userId, long amount, TransactionType type, long updateMillis) {
+    public PointHistoryEntity insert(long userId, long amount, TransactionType type, long updateMillis) {
         throttle(300L);
-        PointHistory pointHistory = new PointHistory(cursor++, userId, amount, type, updateMillis);
+        PointHistoryEntity pointHistory = new PointHistoryEntity(cursor++, userId, amount, type, updateMillis);
         table.add(pointHistory);
         return pointHistory;
     }
 
-    public List<PointHistory> selectAllByUserId(long userId) {
-        return table.stream().filter(pointHistory -> pointHistory.userId() == userId).toList();
+    public List<PointHistoryEntity> selectAllByUserId(long userId) {
+        return table.stream().filter(pointHistoryEntity -> pointHistoryEntity.userId() == userId).toList();
     }
 
     private void throttle(long millis) {
