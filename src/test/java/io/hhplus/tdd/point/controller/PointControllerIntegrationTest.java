@@ -1,6 +1,5 @@
 package io.hhplus.tdd.point.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.hhplus.tdd.point.controller.port.in.ChargePointRequest;
 import io.hhplus.tdd.point.controller.port.in.UsePointRequest;
 import io.hhplus.tdd.point.controller.port.out.PointHistoryResponse;
@@ -12,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class PointControllerIntegrationTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @Autowired
     private PointFacade pointFacade;
