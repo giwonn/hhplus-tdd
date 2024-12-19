@@ -1,9 +1,6 @@
 package io.hhplus.tdd.point.service;
 
-import io.hhplus.tdd.point.domain.TransactionType;
-import io.hhplus.tdd.point.domain.PointHistory;
 import io.hhplus.tdd.point.domain.UserPoint;
-import io.hhplus.tdd.point.service.port.PointHistoryRepository;
 import io.hhplus.tdd.point.service.port.UserPointRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,22 +8,19 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class PointServiceTest {
+class UserPointServiceTest {
 
     @Mock
     UserPointRepository userPointRepository;
 
-    @Mock
-    PointHistoryRepository pointHistoryRepository;
 
     @InjectMocks
-    PointService pointService;
+    UserPointService pointService;
 
     @Test
     void userId로_포인트를_조회하면_현재_포인트를_반환한다() {
@@ -93,20 +87,6 @@ class PointServiceTest {
         // then
         assertThat(actual.getId()).isEqualTo(userId);
         assertThat(actual.getPoint()).isEqualTo(usedPoint);
-    }
-
-    @Test
-    void userId로_포인트_이력을_조회하면_포인트_이력_리스트를_반환한다() {
-        // given
-        long userId = 1L;
-        PointHistory pointHistory = PointHistory.builder().userId(userId).amount(10L).type(TransactionType.CHARGE).updateMillis(1L).build();
-        when(pointHistoryRepository.getByUserId(userId)).thenReturn(List.of(pointHistory));
-
-        // when
-        List<PointHistory> pointHistories = pointService.getHistoriesByUserId(userId);
-
-        // then
-        assertThat(pointHistories).isNotNull();
     }
 
 }
